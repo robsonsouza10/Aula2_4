@@ -6,7 +6,7 @@ import { studentRouter } from './routes/studentRoutes.js';
 
 const app = express();
 
-/*Conexao com o MongoDB*/
+/*Conexao com o MongoDB atraves do mongoose*/
 (async () => {
   try {
     await mongoose.connect('mongodb://localhost:27017/grades', {
@@ -20,5 +20,5 @@ const app = express();
 
 app.use(express.json());
 app.use(studentRouter);
-
+/*servidor iniciado*/
 app.listen(3000, () => console.log('Servidor em execucao na porta: 3000'));
