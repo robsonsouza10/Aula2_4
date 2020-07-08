@@ -2,6 +2,8 @@
 import express from 'express';
 import mongoose from 'mongoose';
 
+require('dotenv').config();
+
 import { studentRouter } from './routes/studentRoutes.js';
 
 const app = express();
@@ -9,10 +11,18 @@ const app = express();
 /*Conexao com o MongoDB atraves do mongoose*/
 (async () => {
   try {
-    await mongoose.connect('mongodb://localhost:27017/grades', {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    process.env.USERDB;
+    await mongoose.connect(
+      'mongodb+srv://' +
+        process.env.USERDB +
+        ':' +
+        process.env.PWDDB +
+        '@bootcamp-smurc.mongodb.net/grades?retryWrites=true&w=majority',
+      {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      }
+    );
   } catch (error) {
     console.log('Erro ao conectar no MongoDB');
   }
